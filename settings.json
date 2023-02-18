@@ -1,4 +1,7 @@
 {
-    "lenght": 3,
-    "max-lenght": 20
+ "length": 4,
+ "max-lenght": 20,
+ "password": "LOL",
+ "visual_feedback": true,
+ "visual_analysis": true
 }
