@@ -24,9 +24,9 @@ def list():
 def run():
     window.destroy()
     if method == "bruteforce":
-        call(["python", "bruteforce.py"])
+        call(["python", "bruteforce_method.py"])
     elif method == "random":
-        call(["python", "crack.py"])
+        call(["python", "random_method.py"])
 
 #! Anchor buttons
 

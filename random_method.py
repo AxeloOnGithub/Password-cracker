@@ -108,7 +108,7 @@ elif visual_analysis:
     Header_label = Label(analysis_window, text="Visual Analysis").grid(row=0, column=0, padx=20, pady=(0, 10), sticky="NEWS")
 
     password_info_label = Label(analysis_window, text=cracked).grid(row=1, column=1, sticky="w")
-    password_length_info_label = Label(analysis_window, text=password).grid(row=2, column=1, sticky="w")
+    password_length_info_label = Label(analysis_window, text=len(password)).grid(row=2, column=1, sticky="w")
     time_info_label = Label(analysis_window, text=str(et-st)).grid(row=3, column=1, sticky="w")
     generations_info_label = Label(analysis_window, text=gen).grid(row=4, column=1, sticky="w")
 
