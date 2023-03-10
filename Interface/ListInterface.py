@@ -5,8 +5,14 @@ from tkinter import filedialog
 from tkinter.filedialog import askopenfile
 import json
 from PIL import Image, ImageTk
+from subprocess import call
 
 has_run = False
+
+#! return to main
+def return_main():
+    window.destroy()
+    call(["python", "interface/MainInterface.py"])
 
 #!Update Settings Function
 def update(filename="settings.json"):
@@ -21,13 +27,49 @@ def update(filename="settings.json"):
 
     if count == 1:
         if L1var.get():
-            active_list = "List1"
+            active_list = "list1"
+
+            with open("lists.json", "r") as info:
+                custom_data = json.load(info)
+
+            custom_data["list1"] = list1box.get(1.0, END).replace('"', '').replace("[", "").replace("]", "").replace(",", "").replace(" ",",").strip()
+
+            with open("lists.json", "w") as f:
+                json.dump(custom_data, f, indent=1)
+    
         elif L2var.get():
-            active_list = "List2"
+            active_list = "list2"
+
+            with open("lists.json", "r") as info:
+                custom_data = json.load(info)
+
+            custom_data["list2"] = list2box.get(1.0, END).replace('"', '').replace("[", "").replace("]", "").replace(",", "").replace(" ",",").strip()
+
+            with open("lists.json", "w") as f:
+                json.dump(custom_data, f, indent=1)
+    
         elif L3var.get():
-            active_list = "List3"
+            active_list = "list3"
+
+            with open("lists.json", "r") as info:
+                custom_data = json.load(info)
+
+            custom_data["list3"] = list3box.get(1.0, END).replace('"', '').replace("[", "").replace("]", "").replace(",", "").replace(" ",",").strip()
+
+            with open("lists.json", "w") as f:
+                json.dump(custom_data, f, indent=1)
+
         elif L4var.get():
-            active_list = "List4"
+            active_list = "list4"
+
+            with open("lists.json", "r") as info:
+                custom_data = json.load(info)
+
+            custom_data["list4"] = list4box.get(1.0, END).replace('"', '').replace("[", "").replace("]", "").replace(",", "").replace(" ",",").strip()
+
+            with open("lists.json", "w") as f:
+                json.dump(custom_data, f, indent=1)
+
         elif CLvar.get():
             active_list = "customlist"
 
@@ -196,4 +238,5 @@ createbutton.grid(row=0, column=1, padx=5)
 updatebutton = Button(button_frame, text="Update List Settings", command=update)
 updatebutton.grid(row=0, column=2, padx=5)
 
+window.protocol("WM_DELETE_WINDOW", return_main)
 window.mainloop()

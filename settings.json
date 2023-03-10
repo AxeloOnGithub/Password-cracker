@@ -1,8 +1,9 @@
 {
  "length": 4,
- "max-lenght": 20,
+ "max_gen": "5000000000",
  "password": "1234",
- "visual_feedback": false,
- "visual_analysis": false,
- "list": "List4"
+ "visual_analysis": true,
+ "advanced_settings": false,
+ "list": "list1",
+ "method": "bruteforce"
 }
