@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 import json
-from PIL import Image, ImageTk
 from subprocess import call
 
 window = Tk()
@@ -14,7 +13,6 @@ CCvar = BooleanVar()
 Lengthvar = IntVar()
 Passwordvar = StringVar()
 Methodvar = StringVar()
-
 
 frame = Frame(window)
 frame.pack(fill=X)
@@ -34,6 +32,10 @@ with open("settings.json", "r") as f:
 def advancedsettings(filename="settings.json"):
     with open(filename, "r") as info:
         data = json.load(info)
+
+    global advanced_settings 
+
+    advanced_settings = data["advanced_settings"]
 
     if data["advanced_settings"] == False:
         data["advanced_settings"] = True
@@ -62,17 +64,33 @@ def reset(filename="settings.json"):
 
     tk.messagebox.showinfo(title= "Settings Reset!", message="Settings was Reset!")
 
+#! Raw Settings
+def raw(filename="settings.json"):
+
+    with open(filename, "r") as info:
+        data = json.load(info)
+
+    new_data = str(data)[0] + '\n' + str(data)[1:-1] + '\n' + str(data)[-1]
+
+    top = Toplevel()
+    raw_data_text = Text(top)
+    raw_data_text.insert(INSERT, new_data.replace(",", ",\n"))
+    raw_data_text.pack()
+
+
+
 #!Update Settings Function
 def updatesettings(filename="settings.json"):
 
     global advanced
+    global advanced_settings
 
     #Erros
     if Passwordvar.get() == "":
             tk.messagebox.showwarning(title= "Error", message="You have not entered a password!")
             return
 
-    if len(Passwordvar.get()) != Lengthvar.get():
+    if advanced == True and len(Passwordvar.get()) != Lengthvar.get():
         tk.messagebox.showwarning(title= "Error", message="Length slider and password length does not match!")
         return
 
@@ -80,11 +98,15 @@ def updatesettings(filename="settings.json"):
     with open(filename, "r") as info:
         data = json.load(info)
 
-    data["length"] = Lengthvar.get()
-    data["password"] = Passwordvar.get()
-    data["visual_analysis"] = VAvar.get()
+    if advanced:
+        data["length"] = Lengthvar.get()
+        data["visual_analysis"] = VAvar.get()
+        data["max_gen"] = maxgen_spin.get()
+    else:
+        data["length"] = len(Passwordvar.get())
+
     data["method"] = Methodvar.get().lower()
-    data["max_gen"] = maxgen_spin.get()
+    data["password"] = Passwordvar.get()
 
     with open(filename, "w") as f:
         json.dump(data, f, indent=1)
@@ -116,6 +138,7 @@ method_optionmenu.grid(row=0,column=0)
 #!Update Button
 Updatebutton = Button(window, text="Update Settings", command=updatesettings).pack(side="top", fill="x")
 Resetbutton = Button(window, text="Reset Settings", command=reset).pack(side="top", fill="x")
+Rawbutton = Button(window, text="Raw Settings", command=raw)#.pack(side="top", fill="x")
 if not advanced:
     AdvancedButton = Button(window, text="Advanced Settings (Reload)", command=advancedsettings).pack(side="top", fill="x")
 

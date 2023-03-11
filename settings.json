@@ -1,9 +1,9 @@
 {
  "length": 4,
- "max_gen": "100000",
- "password": "1234",
+ "max_gen": "5000000000",
+ "password": "wytw",
  "visual_analysis": true,
- "advanced_settings": false,
- "list": "list4",
- "method": "random"
+ "advanced_settings": true,
+ "list": "list2",
+ "method": "bruteforce"
 }

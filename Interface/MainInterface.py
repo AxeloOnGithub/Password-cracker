@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 import json
-from PIL import Image, ImageTk
 from subprocess import call
 
 with open("settings.json", "r") as f:
@@ -11,8 +10,9 @@ with open("settings.json", "r") as f:
 
 
 window = Tk()
-window.title("Settings")
-window.geometry("300x350")
+window.title("Main Menu")
+window.geometry("300x117")
+window.resizable(False, False)
 
 #! Anchor button functions
 def settings():
@@ -37,9 +37,7 @@ list_button.grid(sticky="W", row=1, column=0, padx=(20,0))
 run_button = Button(text="Crack!", command=run, width=10)
 run_button.grid(sticky="W", row=2, column=0, padx=(20,0))
 
-title_label = Label(text="PASSWORD CRACKER", font=("Arial", 10))
-title_label.grid(sticky="W", row=0, column=1, padx=20, pady=(20,0))
-
-
+title_label = Label(text="PASSWORD CRACKER", font=("times", 12, "bold"))
+title_label.grid(sticky="W", row=1, column=1, padx=16)
 
 window.mainloop()

@@ -4,7 +4,6 @@ from tkinter import messagebox
 from tkinter import filedialog
 from tkinter.filedialog import askopenfile
 import json
-from PIL import Image, ImageTk
 from subprocess import call
 
 has_run = False
@@ -97,7 +96,7 @@ def update(filename="settings.json"):
 window = Tk()
 window.title("Lists")
 window.resizable(False, False)
-window.geometry("1795x400")
+window.geometry("1750x230")
 
 L1var = BooleanVar()
 L2var = BooleanVar()
@@ -230,7 +229,7 @@ def create_list():
 
 #! Update List
 importbutton = Button(button_frame, text="import List", command=upload_file)
-importbutton.grid(row=0, column=0, padx=5)
+importbutton.grid(row=0, column=0, padx=(18,5))
 
 createbutton = Button(button_frame, text="create List", command=create_list)
 createbutton.grid(row=0, column=1, padx=5)
