@@ -13,6 +13,7 @@ CCvar = BooleanVar()
 Lengthvar = IntVar()
 Passwordvar = StringVar()
 Methodvar = StringVar()
+Typevar = StringVar()
 
 frame = Frame(window)
 frame.pack(fill=X)
@@ -127,11 +128,20 @@ password_entry.grid(row=1, column=1, padx=10, pady=10)
 method_info_frame = LabelFrame(frame, text="Cracking method", width=100)
 method_info_frame.grid(row=2, column=0, padx=20, pady=(0, 10), sticky="ew")
 
-options = ["Bruteforce","Random"]
+methods = ["Bruteforce","Random"]
+types = ["Test", "Type"]
 Methodvar.set("Bruteforce")
+Typevar.set("Test")
 
-method_optionmenu = OptionMenu(method_info_frame, Methodvar , *options )
+method_optionmenu = OptionMenu(method_info_frame, Methodvar , *methods )
 method_optionmenu.grid(row=0,column=0)
+
+cracking_type_label = Label(method_info_frame, text="Type: ")
+cracking_type_label.grid(row=1,column=0)
+
+cracking_type_optionmenu = OptionMenu(method_info_frame, Typevar , *types)
+cracking_type_optionmenu.grid(row=1,column=1)
+cracking_type_optionmenu.config(width=16)
 
 
 
@@ -165,9 +175,9 @@ if advanced:
     VAbutton.deselect()
     VAbutton.grid(row=0, column=0, sticky="W")
 
-    #!spinbox
+    #! maxgen spinbox
     maxgen_spin =Spinbox(method_info_frame, from_= 100000, to = 5000000000, increment=100000)
-    maxgen_spin.grid(row=0,column=1)    
+    maxgen_spin.grid(row=0,column=1)  
 
     #! normal settings
     NormalButton = Button(window, text="Normal Settings (Reload)", command=advancedsettings).pack(side="top", fill="x")
